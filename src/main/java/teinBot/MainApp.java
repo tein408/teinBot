@@ -8,9 +8,9 @@ public class MainApp {
 
     public static void main(String[] args) throws LoginException{
         JDA jda = JDABuilder
-                .createDefault("token here")
+                .createDefault("NzkwMTUyOTA4NTAyMjA0NDI2.X98dPQ.XvvB0yFQZQHaG1sM6X8v5A3QtyI")
                 .build();
-        jda.addEventListener(new LunchListener());
+        jda.addEventListener(new MessageListener());
 
 
     }//main
