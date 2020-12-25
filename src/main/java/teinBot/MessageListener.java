@@ -34,11 +34,12 @@ public class MessageListener extends ListenerAdapter {
         else {
             if(msg.charAt(0) == '!'){
                 String[] args = message.getContentRaw().substring(1).split(" ");
+                int count;
 
                 if(args.length <= 0) return;
 
                 if(args[0].equalsIgnoreCase("echo")){
-                    int count = 0;
+
                     try{
                         count = Integer.parseInt(args[1]);
                     } catch (Exception e) {
@@ -57,48 +58,34 @@ public class MessageListener extends ListenerAdapter {
                     System.out.println(messageHistory.size());
                 }
 
+                if(args[0].equalsIgnoreCase("test")){
+                    System.out.println(messageHistory.getRetrievedHistory());
+                    //tc.deleteMessages()
+                }
+
                 if(args[0].equalsIgnoreCase("delete")){
                     /*message.delete().queue();*/
-
                     if(args.length != 2) return;
-                    int count = 0;
-
 
                     try{
                         count = Integer.parseInt(args[1]);
                     } catch (Exception e) {
-                        channel.sendMessage("input int pls").queue();
+                        channel.sendMessage("input int please").queue();
                         return;
                     }
 
-                    if(count > 1 && count < 100){
-                        message.delete().queue();
-                        messages = messageHistory.retrievePast(count).complete();
-                        tc.deleteMessages(messages).complete();
-                    }
-                    else if(count > 100 || count <=1) {
-                        int share = count/100;
-                        int reminder = count%100;
-                        System.out.println("reminder : "+reminder);
+                    int share = count/100;
+                    int rest = count%100;
+                    System.out.println("rest : "+rest);
 
-                        for(int i = 0; i<share; i++){
-                            messages = messageHistory.retrievePast(100).complete();
-                            tc.deleteMessages(messages).complete();
-                        }
-
-                        if(reminder > 1){
-                            messages = messageHistory.retrievePast(reminder).complete();
-                            tc.deleteMessages(messages).complete();
-                        }
-                        else if( reminder == 1 || count == 1){
-                            messages = messageHistory.retrievePast(2).complete();
-                            tc.deleteMessages(messages).complete();
-                        }
-                    }
-                    else if(count == 100){
+                    for(int i = 0; i<share; i++){
                         messages = messageHistory.retrievePast(100).complete();
                         tc.deleteMessages(messages).complete();
                     }
+
+                    messages = messageHistory.retrievePast(rest+1).complete();
+                    tc.deleteMessages(messages).complete();
+
                     channel.sendMessage(count + " was deleted").queue();
 
 
