@@ -1,14 +1,10 @@
 package teinBot;
 
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
-import net.dv8tion.jda.internal.entities.TextChannelImpl;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MessageListener extends ListenerAdapter {
 
@@ -19,25 +15,18 @@ public class MessageListener extends ListenerAdapter {
         Message message = event.getMessage();
         MessageChannel channel = event.getChannel();
         TextChannel tc = event.getTextChannel();
-
         String msg = message.getContentDisplay();
-        System.out.println("author : "+author);
-        //System.out.println("channel : "+channel);
-        System.out.println("message : "+msg);
-        System.out.println("message.getId() : "+message.getId());
 
         if(author.isBot()) return;
-
-        if(msg.equals("!ping")){
+        if(msg.equals("!ping")) {
             channel.sendMessage("Pong!").queue();
         }
         else {
-            if(msg.charAt(0) == '!'){
+            if(msg.length() != 0 && msg.charAt(0) == '!'){
                 String[] args = message.getContentRaw().substring(1).split(" ");
                 int count;
 
                 if(args.length <= 0) return;
-
                 if(args[0].equalsIgnoreCase("echo")){
 
                     try{
@@ -58,13 +47,7 @@ public class MessageListener extends ListenerAdapter {
                     System.out.println(messageHistory.size());
                 }
 
-                if(args[0].equalsIgnoreCase("test")){
-                    System.out.println(messageHistory.getRetrievedHistory());
-                    //tc.deleteMessages()
-                }
-
                 if(args[0].equalsIgnoreCase("delete")){
-                    /*message.delete().queue();*/
                     if(args.length != 2) return;
 
                     try{
@@ -76,7 +59,6 @@ public class MessageListener extends ListenerAdapter {
 
                     int share = count/100;
                     int rest = count%100;
-                    System.out.println("rest : "+rest);
 
                     for(int i = 0; i<share; i++){
                         messages = messageHistory.retrievePast(100).complete();
@@ -87,17 +69,10 @@ public class MessageListener extends ListenerAdapter {
                     tc.deleteMessages(messages).complete();
 
                     channel.sendMessage(count + " was deleted").queue();
-
-
                 }
-
             }
-
         }
-
-
     }//onMessageReceived method
-
 
 
 }//class
