@@ -8,7 +8,7 @@ public class MainApp {
 
     public static void main(String[] args) throws LoginException{
         JDA jda = JDABuilder
-                .createDefault("NzkwMTUyOTA4NTAyMjA0NDI2.X98dPQ.XvvB0yFQZQHaG1sM6X8v5A3QtyI")
+                .createDefault("token here")
                 .build();
         jda.addEventListener(new MessageListener());
 
