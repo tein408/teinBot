@@ -1,9 +1,11 @@
 package teinBot;
 
-import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import java.util.List;
 
 public class Avatar extends ListenerAdapter {
 
@@ -11,21 +13,18 @@ public class Avatar extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         String msg = event.getMessage().getContentRaw();
         if(msg.startsWith("$avatar ")){
-            String tag = msg.substring(8);
-            JDA jda = event.getJDA();
+            User user;
+            List<Member> mentionedMember = event.getMessage().getMentionedMembers();
             try {
-                User user = jda.getUserByTag(tag);
-                if(user.getAvatarUrl() != null){
+                if(mentionedMember != null){
+                    user = mentionedMember.get(0).getUser();
                     event.getChannel().sendMessage(user.getAvatarUrl()).queue();
                 }
-                else {
-                    event.getChannel().sendMessage("avatar is null").queue();
-                }
             } catch (Exception e) {
-                event.getChannel().sendMessage("error : Invalid tag format").queue();
+                event.getChannel().sendMessage("error").queue();
             }
         } else if(msg.equals("$avatar")) {
-            event.getChannel().sendMessage("input user's discord tag").queue();
+            event.getChannel().sendMessage("need mention user").queue();
         }
     }//onMessageReceived
 
