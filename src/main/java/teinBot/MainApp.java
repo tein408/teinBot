@@ -25,7 +25,7 @@ public class MainApp {
         Avatar avatar = new Avatar();
         jdaBuilder.addEventListeners(avatar);
 
-        MessageListener messageListener = new MessageListener();
+        DeleteMessages messageListener = new DeleteMessages();
         jdaBuilder.addEventListeners(messageListener);
 
         jdaBuilder.setActivity(Activity.listening("히힛히힛"));
