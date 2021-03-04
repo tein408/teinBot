@@ -18,7 +18,11 @@ public class Avatar extends ListenerAdapter {
             try {
                 if(mentionedMember != null){
                     user = mentionedMember.get(0).getUser();
-                    event.getChannel().sendMessage(user.getAvatarUrl()).queue();
+                    if(user.getAvatarUrl() != null) {
+                        event.getChannel().sendMessage(user.getAvatarUrl() + "?size=1024").queue();
+                    } else if (user.getAvatarUrl() == null){
+                        event.getChannel().sendMessage("no image").queue();
+                    }
                 }
             } catch (Exception e) {
                 event.getChannel().sendMessage("error").queue();
