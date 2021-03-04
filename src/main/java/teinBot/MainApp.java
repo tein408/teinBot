@@ -22,6 +22,9 @@ public class MainApp {
         Repeater repeater = new Repeater();
         jdaBuilder.addEventListeners(repeater);
 
+        Avatar avatar = new Avatar();
+        jdaBuilder.addEventListeners(avatar);
+
         MessageListener messageListener = new MessageListener();
         jdaBuilder.addEventListeners(messageListener);
 

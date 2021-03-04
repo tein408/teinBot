@@ -1,15 +1,9 @@
 package teinBot;
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class MessageListener extends ListenerAdapter {
@@ -64,18 +58,10 @@ public class MessageListener extends ListenerAdapter {
 
                     } catch (IllegalArgumentException e) {
                         e.printStackTrace();
-                        channel.sendMessage(author.getAsMention()+ "delete error").queue();
+                        channel.sendMessage(author.getAsMention()+ " delete error").queue();
                     }
 
                 }//delete
-
-                if(args[0].equalsIgnoreCase("avatar")) {
-                    String tag = message.getContentRaw().substring(8);
-                    JDA jda = event.getJDA();
-                    User user = jda.getUserByTag(tag);
-                    tc.sendMessage(user.getAvatarUrl()).queue();
-                }
-
 
             }
         }
