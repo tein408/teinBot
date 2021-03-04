@@ -6,11 +6,18 @@ import javax.security.auth.login.LoginException;
 
 public class MainApp {
 
-    public static void main(String[] args) throws LoginException{
-        JDA jda = JDABuilder
-                .createDefault(Token.getToken())
-                .build();
+    public static void main(String[] args) {
+
+        JDABuilder jdaBuilder = JDABuilder.createDefault(Token.getToken());
+        JDA jda = null;
+
         jda.addEventListener(new MessageListener());
+
+        try {
+            jda = jdaBuilder.build();
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }
 
     }//main
 
