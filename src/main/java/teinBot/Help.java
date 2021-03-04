@@ -22,6 +22,7 @@ public class Help extends ListenerAdapter {
             //embedBuilder.addBlankField(true);
             embedBuilder.addField("$help", "도움말 출력",false);
             embedBuilder.addField("$ping", "Pong! 출력",false);
+            embedBuilder.addField("$avatar [@Mention]", "해당 유저 프로필 이미지 출력",false);
             embedBuilder.addField("$echo [int]", "int 만큼 [hello : int] 출력",false);
             embedBuilder.addField("$delete [int]", "int 만큼 메시지 삭제",false);
             embedBuilder.setFooter("made by 이안#8990");
