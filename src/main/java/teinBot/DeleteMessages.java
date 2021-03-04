@@ -32,7 +32,6 @@ public class DeleteMessages extends ListenerAdapter {
 
                 int share = count/100;
                 int rest = count%100;
-
                 try{
                     for(int i = 0; i<share; i++){
                         messages = messageHistory.retrievePast(100).complete();
@@ -45,7 +44,6 @@ public class DeleteMessages extends ListenerAdapter {
                     channel.sendMessage(count + " was deleted").queue();
 
                 } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
                     channel.sendMessage("delete error").queue();
                 }
             } else if(!args[1].chars().allMatch(Character::isDigit)){
