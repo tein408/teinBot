@@ -50,10 +50,6 @@ public class MessageListener extends ListenerAdapter {
                 int count;
 
                 if(args.length <= 0) return;
-                if(args[0].equalsIgnoreCase("ping")){
-                    channel.sendMessage("Pong!").queue();
-                }
-
 
                 if(args[0].equalsIgnoreCase("echo")){
 
