@@ -28,7 +28,7 @@ public class MainApp {
         DeleteMessages messageListener = new DeleteMessages();
         jdaBuilder.addEventListeners(messageListener);
 
-        jdaBuilder.setActivity(Activity.listening("히힛히힛"));
+        jdaBuilder.setActivity(Activity.listening("$help"));
 
         try {
             jda = jdaBuilder.build();
