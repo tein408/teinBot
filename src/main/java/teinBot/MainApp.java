@@ -19,6 +19,9 @@ public class MainApp {
         Help help = new Help();
         jdaBuilder.addEventListeners(help);
 
+        Repeater repeater = new Repeater();
+        jdaBuilder.addEventListeners(repeater);
+
         MessageListener messageListener = new MessageListener();
         jdaBuilder.addEventListeners(messageListener);
 

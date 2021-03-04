@@ -21,45 +21,16 @@ public class MessageListener extends ListenerAdapter {
         Message message = event.getMessage();
         MessageChannel channel = event.getChannel();
         TextChannel tc = event.getTextChannel();
-        EmbedBuilder embedBuilder = new EmbedBuilder();
 
         String msg = message.getContentDisplay();
 
         if(author.isBot()) return;
-        /*if(msg.equalsIgnoreCase("$help")) {
-            embedBuilder.setColor(new Color(66, 98, 140));
-            //embedBuilder.setAuthor("setAuthor");
-            embedBuilder.setTitle("teinBot");
-            embedBuilder.setDescription("How to use teinBot?");
-            //embedBuilder.addBlankField(true);
-            embedBuilder.addField("$help", "도움말 출력",false);
-            embedBuilder.addField("$ping", "Pong! 출력",false);
-            embedBuilder.addField("$echo [int]", "int 만큼 [hello : int] 출력",false);
-            embedBuilder.addField("$delete [int]", "int 만큼 메시지 삭제",false);
-            embedBuilder.setFooter("made by 이안#8990");
-            embedBuilder.setTimestamp(OffsetDateTime.now());
-            channel.sendMessage(embedBuilder.build()).queue();
-        }
-        else*/ {
+        {
             if(msg.length() != 0 && msg.charAt(0) == '$'){
                 String[] args = message.getContentRaw().substring(1).split(" ");
                 int count;
 
                 if(args.length <= 0) return;
-
-                if(args[0].equalsIgnoreCase("echo")){
-
-                    try{
-                        count = Integer.parseInt(args[1]);
-                    } catch (Exception e) {
-                        channel.sendMessage("input int pls").queue();
-                        return;
-                    }
-                    for(int i=0; i<count; i++){
-                        channel.sendMessage("hello : "+i).queue();
-                    }
-                }
-
                 MessageHistory messageHistory = new MessageHistory(tc);
                 List<Message> messages;
 
