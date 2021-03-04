@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MessageListener extends ListenerAdapter {
 
-   @Override
+    @Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
         User author = event.getAuthor();
@@ -101,9 +101,19 @@ public class MessageListener extends ListenerAdapter {
 
                     } catch (IllegalArgumentException e) {
                         e.printStackTrace();
+                        channel.sendMessage(author.getAsMention()+ "delete error").queue();
                     }
 
+                }//delete
+
+                if(args[0].equalsIgnoreCase("avatar")) {
+                    String tag = message.getContentRaw().substring(8);
+                    JDA jda = event.getJDA();
+                    User user = jda.getUserByTag(tag);
+                    tc.sendMessage(user.getAvatarUrl()).queue();
                 }
+
+
             }
         }
     }//onMessageReceived method
