@@ -24,13 +24,9 @@ public class MessageListener extends ListenerAdapter {
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
         String msg = message.getContentDisplay();
-        //System.out.println("author : "+author);
-        //System.out.println("channel : "+channel);
-        //System.out.println("message : "+msg);
-        //System.out.println("message.getId() : "+message.getId());
 
         if(author.isBot()) return;
-        if(msg.equalsIgnoreCase("$help")) {
+        /*if(msg.equalsIgnoreCase("$help")) {
             embedBuilder.setColor(new Color(66, 98, 140));
             //embedBuilder.setAuthor("setAuthor");
             embedBuilder.setTitle("teinBot");
@@ -44,7 +40,7 @@ public class MessageListener extends ListenerAdapter {
             embedBuilder.setTimestamp(OffsetDateTime.now());
             channel.sendMessage(embedBuilder.build()).queue();
         }
-        else {
+        else*/ {
             if(msg.length() != 0 && msg.charAt(0) == '$'){
                 String[] args = message.getContentRaw().substring(1).split(" ");
                 int count;

@@ -16,6 +16,9 @@ public class MainApp {
         PingPong pingPong = new PingPong();
         jdaBuilder.addEventListeners(pingPong);
 
+        Help help = new Help();
+        jdaBuilder.addEventListeners(help);
+
         MessageListener messageListener = new MessageListener();
         jdaBuilder.addEventListeners(messageListener);
 
@@ -32,8 +35,6 @@ public class MainApp {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
 
     }//main
 
