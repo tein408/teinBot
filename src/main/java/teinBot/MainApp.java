@@ -3,6 +3,7 @@ package teinBot;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
 
@@ -11,7 +12,6 @@ public class MainApp {
     public static void main(String[] args) {
 
         JDABuilder jdaBuilder = JDABuilder.createDefault(Token.getToken());
-        JDA jda = null;
 
         PingPong pingPong = new PingPong();
         jdaBuilder.addEventListeners(pingPong);
@@ -28,7 +28,14 @@ public class MainApp {
         DeleteMessages messageListener = new DeleteMessages();
         jdaBuilder.addEventListeners(messageListener);
 
+        WelcomeMessage welcomeMessage = new WelcomeMessage();
+
+        jdaBuilder.addEventListeners(welcomeMessage);
         jdaBuilder.setActivity(Activity.listening("$help"));
+
+        jdaBuilder.enableIntents(GatewayIntent.GUILD_MEMBERS);
+
+        JDA jda = null;
 
         try {
             jda = jdaBuilder.build();
@@ -36,11 +43,11 @@ public class MainApp {
             e.printStackTrace();
         }
 
-        try {
+        /*try {
             jda.awaitReady();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }//main
 
