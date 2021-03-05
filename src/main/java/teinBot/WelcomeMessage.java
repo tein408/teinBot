@@ -20,9 +20,6 @@ public class WelcomeMessage extends ListenerAdapter {
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
-        System.out.println("onGuildMemberRemove");
-        System.out.println(event.getUser().getName());
-        //System.out.println(event.getUser().getAsMention());
         try {
             event.getGuild()
                     .getTextChannelsByName("in-out-log", false)
