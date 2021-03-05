@@ -11,10 +11,10 @@ public class Help extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        EmbedBuilder embedBuilder = new EmbedBuilder();
-        String msg = event.getMessage().getContentDisplay();
+        String msg = event.getMessage().getContentRaw();
 
         if(msg.equalsIgnoreCase("$help")) {
+            EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setColor(new Color(66, 98, 140));
             //embedBuilder.setAuthor("setAuthor");
             embedBuilder.setTitle("teinBot");
