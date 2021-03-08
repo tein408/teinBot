@@ -9,10 +9,11 @@ public class LogVO {
     private String message;
     private String changed;
     private String delete;
+    private String messageId;
 
     public LogVO(){}
 
-    public LogVO(String author, String name, String channel, String channelid, String message, String changed, String delete) {
+    public LogVO(String author, String name, String channel, String channelid, String message, String changed, String delete, String messageId) {
         this.author = author;
         this.name = name;
         this.channel = channel;
@@ -20,13 +21,15 @@ public class LogVO {
         this.message = message;
         this.changed = changed;
         this.delete = delete;
+        this.messageId = messageId;
     }
 
-    public LogVO(String author, String name, String channel, String channelid, String message) {
+    public LogVO(String author, String name, String channel, String channelid, String messageId, String message) {
         this.author = author;
         this.name = name;
         this.channel = channel;
         this.channelid = channelid;
+        this.messageId = messageId;
         this.message = message;
     }
 
@@ -37,6 +40,7 @@ public class LogVO {
                 ", name='" + name + '\'' +
                 ", channel='" + channel + '\'' +
                 ", chaneelid='" + channelid + '\'' +
+                ", messageId='" + messageId + '\'' +
                 ", message='" + message + '\'' +
                 ", changed='" + changed + '\'' +
                 ", delete='" + delete + '\'' +
@@ -97,5 +101,13 @@ public class LogVO {
 
     public void setDelete(String delete) {
         this.delete = delete;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 }//class
