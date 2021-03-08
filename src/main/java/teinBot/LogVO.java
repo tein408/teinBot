@@ -10,6 +10,8 @@ public class LogVO {
     private String changed;
     private String delete;
 
+    public LogVO(){}
+
     public LogVO(String author, String name, String channel, String channelid, String message, String changed, String delete) {
         this.author = author;
         this.name = name;
