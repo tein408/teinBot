@@ -1,5 +1,5 @@
 # Project exclude paths
 /.gradle/
 /src/main/java/teinBot/Token.java
-/src/main/java/teinBot/Goguma.java.java
+/src/main/java/teinBot/Goguma.java
 /.gitignore
