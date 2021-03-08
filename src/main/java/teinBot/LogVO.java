@@ -22,6 +22,14 @@ public class LogVO {
         this.delete = delete;
     }
 
+    public LogVO(String author, String name, String channel, String channelid, String message) {
+        this.author = author;
+        this.name = name;
+        this.channel = channel;
+        this.channelid = channelid;
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "LogVO{" +
