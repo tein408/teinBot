@@ -75,5 +75,24 @@ public class LogDAO {
         }
     }//updateDB
 
+    public String selectBeforeMessage(String messageId) {
+        String beforeMessage = "";
+        try {
+            conn = getConnection();
+            sql = "select message from teinbotlog where messageId = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, messageId);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                beforeMessage = rs.getString("message");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeDB();
+        }
+        return beforeMessage;
+    }//selectBeforeMessage
+
 
 }//class
