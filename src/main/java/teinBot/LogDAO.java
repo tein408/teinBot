@@ -75,16 +75,17 @@ public class LogDAO {
         }
     }//updateDB
 
-    public String selectBeforeMessage(String messageId) {
-        String beforeMessage = "";
+    public LogVO selectBeforeMessage(String messageId) {
+        LogVO beforeMessage = new LogVO();
         try {
             conn = getConnection();
-            sql = "select message from teinbotlog where messageId = ?";
+            sql = "select author, message from teinbotlog where messageId = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, messageId);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-                beforeMessage = rs.getString("message");
+                beforeMessage.setAuthor(rs.getString("author"));
+                beforeMessage.setMessage(rs.getString("message"));
             }
         } catch (Exception e) {
             e.printStackTrace();
