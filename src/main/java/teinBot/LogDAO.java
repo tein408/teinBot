@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class LogDAO {
 
@@ -93,6 +93,25 @@ public class LogDAO {
         }
         return beforeMessage;
     }//selectBeforeMessage
+
+    public void messageDeleted(String messageId) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+            Date time = new Date();
+            String date = format.format(time);
+
+            conn = getConnection();
+            sql = "update teinbotlog set deleteMsg = ? where messageId = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, date);
+            pstmt.setString(2, messageId);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeDB();
+        }
+    }//messageDeleted
 
 
 }//class
