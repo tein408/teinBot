@@ -8,19 +8,19 @@ public class LogVO {
     private String channelid;
     private String message;
     private String changed;
-    private String delete;
+    private String deleteMsg;
     private String messageId;
 
     public LogVO(){}
 
-    public LogVO(String author, String name, String channel, String channelid, String message, String changed, String delete, String messageId) {
+    public LogVO(String author, String name, String channel, String channelid, String message, String changed, String deleteMsg, String messageId) {
         this.author = author;
         this.name = name;
         this.channel = channel;
         this.channelid = channelid;
         this.message = message;
         this.changed = changed;
-        this.delete = delete;
+        this.deleteMsg = deleteMsg;
         this.messageId = messageId;
     }
 
@@ -43,7 +43,7 @@ public class LogVO {
                 ", messageId='" + messageId + '\'' +
                 ", message='" + message + '\'' +
                 ", changed='" + changed + '\'' +
-                ", delete='" + delete + '\'' +
+                ", deleteMsg='" + deleteMsg + '\'' +
                 '}';
     }
 
@@ -95,12 +95,12 @@ public class LogVO {
         this.changed = changed;
     }
 
-    public String getDelete() {
-        return delete;
+    public String getDeleteMsg() {
+        return deleteMsg;
     }
 
-    public void setDelete(String delete) {
-        this.delete = delete;
+    public void setDeleteMsg(String delete) {
+        this.deleteMsg = delete;
     }
 
     public String getMessageId() {
