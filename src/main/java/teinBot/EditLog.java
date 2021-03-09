@@ -23,18 +23,19 @@ public class EditLog extends ListenerAdapter {
             return;
         }
 
+        logVO = logDAO.selectBeforeMessage(event.getMessageId());
+
         EmbedBuilder update = new EmbedBuilder();
         update.setColor(Color.GRAY);
         update.setAuthor(event.getAuthor().getAsTag(), null, user.getAvatarUrl());
         update.setTitle("Message edited at #"+event.getChannel().getName());
 
-        update.addField("Test", logDAO.selectBeforeMessage(event.getMessageId()),false);
+        update.addField("Test", logVO.getMessage(),false);
         update.addField("After", event.getMessage().getContentRaw(),false);
         update.setTimestamp(OffsetDateTime.now());
 
         logVO.setChanged(event.getMessage().getContentRaw());
         logVO.setMessageId(event.getMessageId());
-        System.out.println("test : " + logVO.getChanged() + " "+ logVO.getMessageId());
         logDAO.updateDB(logVO);
 
         event.getGuild().getTextChannelsByName("update-message-log",false)
