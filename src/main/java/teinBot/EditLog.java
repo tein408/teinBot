@@ -23,22 +23,23 @@ public class EditLog extends ListenerAdapter {
         }
 
         logVO = logDAO.selectBeforeMessage(event.getMessageId());
+        if(logVO.getMessage()!=null){
+            EmbedBuilder update = new EmbedBuilder();
+            update.setColor(Color.GRAY);
+            update.setAuthor(event.getAuthor().getAsTag(), null, user.getAvatarUrl());
+            update.setTitle("Message edited at #"+event.getChannel().getName());
 
-        EmbedBuilder update = new EmbedBuilder();
-        update.setColor(Color.GRAY);
-        update.setAuthor(event.getAuthor().getAsTag(), null, user.getAvatarUrl());
-        update.setTitle("Message edited at #"+event.getChannel().getName());
+            update.addField("Test", logVO.getMessage(),false);
+            update.addField("After", event.getMessage().getContentRaw(),false);
+            update.setTimestamp(OffsetDateTime.now());
 
-        update.addField("Test", logVO.getMessage(),false);
-        update.addField("After", event.getMessage().getContentRaw(),false);
-        update.setTimestamp(OffsetDateTime.now());
+            logVO.setChanged(event.getMessage().getContentRaw());
+            logVO.setMessageId(event.getMessageId());
+            logDAO.updateDB(logVO);
 
-        logVO.setChanged(event.getMessage().getContentRaw());
-        logVO.setMessageId(event.getMessageId());
-        logDAO.updateDB(logVO);
-
-        event.getGuild().getTextChannelsByName("update-message-log",false)
-                .get(0).sendMessage(update.build()).queue();
+            event.getGuild().getTextChannelsByName("update-message-log",false)
+                    .get(0).sendMessage(update.build()).queue();
+        }
 
     }//onMessageUpdate
 
