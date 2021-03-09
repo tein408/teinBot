@@ -22,9 +22,8 @@ public class LogDAO {
         conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://"+server+"/"+database +
-                    "?useSSL=false", user, pwd);
-            System.out.println("conn success");
+            conn = DriverManager.getConnection("jdbc:mysql://"+server+"/"+database +"?useSSL=false", user, pwd);
+            //System.out.println("conn success");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,5 +39,26 @@ public class LogDAO {
             e.printStackTrace();
         }
     }//closeDB
+
+    public void insertDB(LogVO logVO){
+        try {
+            conn = getConnection();
+            sql = "insert into teinbotlog (author, name, channel, channelid, messageId, message)" +
+                    " values (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, logVO.getAuthor());
+            pstmt.setString(2, logVO.getName());
+            pstmt.setString(3, logVO.getChannel());
+            pstmt.setString(4, logVO.getChannelid());
+            pstmt.setString(5, logVO.getMessageId());
+            pstmt.setString(6, logVO.getMessage());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeDB();
+        }
+    }//insertDB
+
 
 }//class
