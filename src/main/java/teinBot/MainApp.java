@@ -25,14 +25,17 @@ public class MainApp {
         Avatar avatar = new Avatar();
         jdaBuilder.addEventListeners(avatar);
 
-        DeleteMessages messageListener = new DeleteMessages();
+        DeleteMessage messageListener = new DeleteMessage();
         jdaBuilder.addEventListeners(messageListener);
 
         WelcomeMessage welcomeMessage = new WelcomeMessage();
-
         jdaBuilder.addEventListeners(welcomeMessage);
-        jdaBuilder.setActivity(Activity.listening("$help"));
 
+        jdaBuilder.addEventListeners(new ChatLog());
+        jdaBuilder.addEventListeners(new EditLog());
+        jdaBuilder.addEventListeners(new Goguma());
+
+        jdaBuilder.setActivity(Activity.listening("$help"));
         jdaBuilder.enableIntents(GatewayIntent.GUILD_MEMBERS);
 
         JDA jda = null;
