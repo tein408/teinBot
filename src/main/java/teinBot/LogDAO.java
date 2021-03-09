@@ -60,5 +60,20 @@ public class LogDAO {
         }
     }//insertDB
 
+    public void updateDB(LogVO logVO){
+        try {
+            conn = getConnection();
+            sql = "update teinbotlog set changed = ? where messageId = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, logVO.getChanged());
+            pstmt.setString(2, logVO.getMessageId());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeDB();
+        }
+    }//updateDB
+
 
 }//class
