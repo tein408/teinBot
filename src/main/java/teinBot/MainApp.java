@@ -33,6 +33,7 @@ public class MainApp {
 
         jdaBuilder.addEventListeners(new ChatLog());
         jdaBuilder.addEventListeners(new EditLog());
+        jdaBuilder.addEventListeners(new DeleteLog());
         jdaBuilder.addEventListeners(new Goguma());
 
         jdaBuilder.setActivity(Activity.listening("$help"));
