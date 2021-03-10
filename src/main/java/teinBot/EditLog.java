@@ -29,7 +29,7 @@ public class EditLog extends ListenerAdapter {
             update.setAuthor(event.getAuthor().getAsTag(), null, user.getAvatarUrl());
             update.setTitle("Message edited at #"+event.getChannel().getName());
 
-            update.addField("Test", logVO.getMessage(),false);
+            update.addField("Before", logVO.getMessage(),false);
             update.addField("After", event.getMessage().getContentRaw(),false);
             update.setTimestamp(OffsetDateTime.now());
 
@@ -42,5 +42,6 @@ public class EditLog extends ListenerAdapter {
         }
 
     }//onMessageUpdate
+
 
 }//class
